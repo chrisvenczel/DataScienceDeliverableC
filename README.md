@@ -9,3 +9,5 @@ This repo contains all the table creation and modification/cleaning code for our
 **DateDimension.sql** contains code used to create the table as well as the code to populate the table.
 
 **Table_Cleaning.ipnyp** contains code used to determine which columns to drop from dataset and what to do about missing values.
+
+**FactTable.sql** contains code for fact table creation and importing data.
