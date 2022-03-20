@@ -53,7 +53,7 @@ create table event(
   ),
   costs bigint check (
     costs >= 0
-    and costs <= 100000000000
+    and costs <= 10000000000000
   ),
   foreign_aid bigint check (
     foreign_aid >= 0
