@@ -378,3 +378,410 @@ WITH (
 )
 TABLESPACE pg_default;
 
+
+---quality of life table: ------
+
+ALTER TABLE quality_of_life
+
+  ADD quality_of_life_key serial primary key,
+  ADD access_at_least_drinking_basic_water_percentage numeric check (
+    access_at_least_drinking_basic_water_percentage >= 0
+    and access_at_least_drinking_basic_water_percentage <= 100000000000000
+  ),
+  ADD access_at_least_drinking_basic_water_urban_percentage  numeric check (
+    access_at_least_drinking_basic_water_urban_percentage >= 0
+    and access_at_least_drinking_basic_water_urban_percentage <= 100000000000000
+  ),
+  ADD access_at_least_drinking_basic_water_rural_percentage  numeric check (
+    access_at_least_drinking_basic_water_rural_percentage >= 0
+    and access_at_least_drinking_basic_water_rural_percentage <= 100000000000000
+  ),
+
+  ADD access_safely_managed_drinking_water_percentage   numeric check (
+    access_safely_managed_drinking_water_percentage  >= 0
+    and access_safely_managed_drinking_water_percentage  <= 100000000000000
+ ),
+  ADD access_safely_managed_drinking_water_urban_percentage    numeric check (
+    access_safely_managed_drinking_water_urban_percentage   >= 0
+    and access_safely_managed_drinking_water_urban_percentage   <= 100000000000000
+ ),
+ ADD access_safely_managed_drinking_water_rural_percentage    numeric check (
+    access_safely_managed_drinking_water_rural_percentage   >= 0
+    and access_safely_managed_drinking_water_rural_percentage   <= 100000000000000
+ ),
+ ADD access_handwashing_facilities_percentage    numeric check (
+    access_handwashing_facilities_percentage   >= 0
+    and access_handwashing_facilities_percentage   <= 100000000000000
+ ),
+ ADD access_handwashing_facilities_urban_percentage    numeric check (
+    access_handwashing_facilities_urban_percentage   >= 0
+    and access_handwashing_facilities_urban_percentage   <= 100000000000000
+ ),
+ ADD access_handwashing_facilities_rural_percentage    numeric check (
+    access_handwashing_facilities_rural_percentage   >= 0
+    and access_handwashing_facilities_rural_percentage   <= 100000000000000
+ ),
+ ADD mortality_rate_unsafe_water_or_sanitation_per_1000    numeric check (
+    mortality_rate_unsafe_water_or_sanitation_per_1000    >= 0
+    and mortality_rate_unsafe_water_or_sanitation_per_1000    <= 100000000000000
+ ),
+ ADD maternal_leave_benefits_percentage_of_wages     numeric check (
+    maternal_leave_benefits_percentage_of_wages    >= 0
+    and maternal_leave_benefits_percentage_of_wages    <= 100000000000000
+ ),
+ ADD maternal_mortality_ratio     numeric check (
+    maternal_mortality_ratio    >= 0
+    and maternal_mortality_ratio    <= 100000000000000
+ ),
+ ADD lifetime_risk_maternal_death_percentage     numeric check (
+    lifetime_risk_maternal_death_percentage    >= 0
+    and lifetime_risk_maternal_death_percentage    <= 100000000000000
+ );
+ 
+
+  ADD country_code  varchar,
+  ADD yr integer;
+
+
+
+---- country table: -----
+
+ALTER TABLE country
+
+ALTER TABLE country
+
+   ADD country_code  varchar,
+  ADD yr integer,
+ADD total_population_count integer check (
+    total_population_count >= 0
+    and total_population_count <= 100000000000000
+  ),
+ ADD fertility_rate   numeric check (
+    fertility_rate  >= 0
+    and fertility_rate  <= 100000000000000
+ ),
+ ADD suicide_death_rate    numeric check (
+    suicide_death_rate   >= 0
+    and suicide_death_rate   <= 100000000000000
+ ),
+ ADD age_dependency_ratio_percent_working_age    numeric check (
+    age_dependency_ratio_percent_working_age   >= 0
+    and age_dependency_ratio_percent_working_age   <= 100000000000000
+ ),
+ ADD age_dependency_ratio_old    numeric check (
+    age_dependency_ratio_old   >= 0
+    and age_dependency_ratio_old   <= 100000000000000
+ ),
+ ADD age_dependency_ratio_young    numeric check (
+    age_dependency_ratio_young   >= 0
+    and age_dependency_ratio_young   <= 100000000000000
+ ),
+   ADD income_group text,
+  ADD region text,
+  ADD currency_type text,
+  ADD trade_system text,
+ADD government_accounting_concept text,
+  ADD two_alpha_code text,
+ADD short_name text,
+ADD land_area_in_square_km    numeric check (
+    land_area_in_square_km   >= 0
+    and land_area_in_square_km   <= 100000000000000
+ ),
+   ADD continent text,
+  ADD capital_city text,
+  ADD leader_name text,
+  ADD party_stance text,
+  ADD government_type text;
+
+
+
+
+
+
+----population table-----
+ALTER TABLE population
+
+  ADD population_key serial primary key,
+  
+  ADD country_code  varchar,
+  ADD yr integer,
+
+ADD life_expectancy_at_birth_for_females  numeric check (
+    life_expectancy_at_birth_for_females   >= 0
+    and life_expectancy_at_birth_for_females   <= 100000000000000
+ ),
+  
+  ADD life_expectancy_at_birth_for_males  numeric check (
+    life_expectancy_at_birth_for_males  >= 0
+    and life_expectancy_at_birth_for_males  <= 100000000000000
+  ),
+
+  
+  ADD net_migration  numeric check (
+    net_migration  >= 0
+    and net_migration  <= 100000000000000
+ ),
+ ADD percent_demographics_in_rural     numeric check (
+    percent_demographics_in_rural    >= 0
+    and percent_demographics_in_rural    <= 100000000000000
+ ),
+ ADD percent_demographics_in_urban     numeric check (
+    percent_demographics_in_urban    >= 0
+    and percent_demographics_in_urban    <= 100000000000000
+ ),
+ ADD percent_poverty_headcount_ratio_at_national_poverty_line    numeric check (
+    percent_poverty_headcount_ratio_at_national_poverty_line   >= 0
+    and percent_poverty_headcount_ratio_at_national_poverty_line   <= 100000000000000
+ ),
+ ADD percent_rural_poverty_headcount_ratio_at_national_poverty_line    numeric check (
+    percent_rural_poverty_headcount_ratio_at_national_poverty_line   >= 0
+    and percent_rural_poverty_headcount_ratio_at_national_poverty_line   <= 100000000000000
+ ),
+ ADD percent_urban_poverty_headcount_ratio_at_national_poverty_line    numeric check (
+    percent_urban_poverty_headcount_ratio_at_national_poverty_line    >= 0
+    and percent_urban_poverty_headcount_ratio_at_national_poverty_line    <= 100000000000000
+ ),
+ ADD percent_population_growth   numeric check (
+    percent_population_growth    >= 0
+    and percent_population_growth    <= 100000000000000
+ ),
+  ADD percent_rural_population_growth    numeric check (
+    percent_rural_population_growth     >= 0
+    and percent_rural_population_growth     <= 100000000000000
+ ),
+  ADD percent_urban_population_growth    numeric check (
+    percent_urban_population_growth     >= 0
+    and percent_urban_population_growth     <= 100000000000000
+ ),
+  ADD percent_population_female   numeric check (
+    percent_population_female    >= 0
+    and percent_population_female    <= 100000000000000
+ ),
+  ADD percent_population_male   numeric check (
+    percent_population_male    >= 0
+    and percent_population_male    <= 100000000000000
+ ),
+  ADD percent_population_ages_0_to_14_female   numeric check (
+    percent_population_ages_0_to_14_female    >= 0
+    and percent_population_ages_0_to_14_female    <= 100000000000000
+ ),
+ ADD percent_population_ages_0_to_14_male   numeric check (
+    percent_population_ages_0_to_14_male    >= 0
+    and percent_population_ages_0_to_14_male    <= 100000000000000
+ ),
+ ADD percent_population_ages_15_to_19_female   numeric check (
+    percent_population_ages_15_to_19_female    >= 0
+    and percent_population_ages_15_to_19_female    <= 100000000000000
+ ),
+ ADD percent_population_ages_15_to_19_male   numeric check (
+    percent_population_ages_15_to_19_male    >= 0
+    and percent_population_ages_15_to_19_male    <= 100000000000000
+ ),
+ ADD percent_population_ages_20_to_24_female   numeric check (
+    percent_population_ages_20_to_24_female    >= 0
+    and percent_population_ages_20_to_24_female    <= 100000000000000
+ ),
+ ADD percent_population_ages_20_to_24_male   numeric check (
+    percent_population_ages_20_to_24_male    >= 0
+    and percent_population_ages_20_to_24_male    <= 100000000000000
+ ),
+  ADD percent_population_ages_25_to_29_female   numeric check (
+    percent_population_ages_25_to_29_female    >= 0
+    and percent_population_ages_25_to_29_female    <= 100000000000000
+ ),
+  ADD percent_population_ages_25_to_29_male   numeric check (
+    percent_population_ages_25_to_29_male    >= 0
+    and percent_population_ages_25_to_29_male    <= 100000000000000
+ ),
+  ADD percent_population_ages_30_to_34_female   numeric check (
+    percent_population_ages_30_to_34_female    >= 0
+    and percent_population_ages_30_to_34_female    <= 100000000000000
+ ),
+  ADD percent_population_ages_30_to_34_male   numeric check (
+    percent_population_ages_30_to_34_male    >= 0
+    and percent_population_ages_30_to_34_male    <= 100000000000000
+ ),
+  ADD percent_population_ages_35_to_39_female   numeric check (
+    percent_population_ages_35_to_39_female    >= 0
+    and percent_population_ages_35_to_39_female    <= 100000000000000
+ ),
+  ADD percent_population_ages_35_to_39_male   numeric check (
+    percent_population_ages_35_to_39_male    >= 0
+    and percent_population_ages_35_to_39_male    <= 100000000000000
+ ),
+  ADD percent_population_ages_40_to_44_female   numeric check (
+    percent_population_ages_40_to_44_female    >= 0
+    and percent_population_ages_40_to_44_female    <= 100000000000000
+ ),
+  ADD percent_population_ages_40_to_44_male   numeric check (
+    percent_population_ages_40_to_44_male    >= 0
+    and percent_population_ages_40_to_44_male    <= 100000000000000
+ ),
+  ADD percent_population_ages_45_to_49_female   numeric check (
+    percent_population_ages_45_to_49_female    >= 0
+    and percent_population_ages_45_to_49_female    <= 100000000000000
+ ),
+  ADD percent_population_ages_45_to_49_male   numeric check (
+    percent_population_ages_45_to_49_male    >= 0
+    and percent_population_ages_45_to_49_male    <= 100000000000000
+ ),
+  ADD percent_population_ages_50_to_54_female   numeric check (
+    percent_population_ages_50_to_54_female    >= 0
+    and percent_population_ages_50_to_54_female    <= 100000000000000
+ ),
+  ADD percent_population_ages_50_to_54_male   numeric check (
+    percent_population_ages_50_to_54_male    >= 0
+    and percent_population_ages_50_to_54_male    <= 100000000000000
+ ),
+  ADD percent_population_ages_55_to_59_female   numeric check (
+    percent_population_ages_55_to_59_female    >= 0
+    and percent_population_ages_55_to_59_female    <= 100000000000000
+ ),
+  ADD percent_population_ages_55_to_59_male   numeric check (
+    percent_population_ages_55_to_59_male    >= 0
+    and percent_population_ages_55_to_59_male    <= 100000000000000
+ ),
+  ADD percent_population_ages_60_to_64_female   numeric check (
+    percent_population_ages_60_to_64_female    >= 0
+    and percent_population_ages_60_to_64_female    <= 100000000000000
+ ),
+  ADD percent_population_ages_60_to_64_male   numeric check (
+    percent_population_ages_60_to_64_male    >= 0
+    and percent_population_ages_60_to_64_male    <= 100000000000000
+ ),
+  ADD percent_population_ages_65_and_above_female   numeric check (
+    percent_population_ages_65_and_above_female    >= 0
+    and percent_population_ages_65_and_above_female    <= 100000000000000
+ ),
+  ADD percent_population_ages_65_and_above_male   numeric check (
+    percent_population_ages_65_and_above_male    >= 0
+    and percent_population_ages_65_and_above_male    <= 100000000000000
+ );
+  
+--population add v2:
+ALTER TABLE population
+  
+  ADD country_code  varchar,
+  ADD yr integer,
+
+ADD life_expectancy_at_birth_for_females  numeric,
+  
+  ADD life_expectancy_at_birth_for_males  numeric,
+
+  
+  ADD net_migration  numeric ,
+ ADD percent_demographics_in_rural     numeric ,
+ ADD percent_demographics_in_urban     numeric ,
+ ADD percent_poverty_headcount_ratio_at_national_poverty_line    numeric ,
+ ADD percent_rural_poverty_headcount_ratio_at_national_poverty_line    numeric ,
+ ADD percent_urban_poverty_headcount_ratio_at_national_poverty_line    numeric ,
+ ADD percent_population_growth   numeric ,
+  ADD percent_rural_population_growth    numeric ,
+  ADD percent_urban_population_growth    numeric ,
+  ADD percent_population_female   numeric ,
+  ADD percent_population_male   numeric ,
+  ADD percent_population_ages_0_to_14_female   numeric ,
+ ADD percent_population_ages_0_to_14_male   numeric ,
+ ADD percent_population_ages_15_to_19_female   numeric ,
+ ADD percent_population_ages_15_to_19_male   numeric ,
+ ADD percent_population_ages_20_to_24_female   numeric ,
+ ADD percent_population_ages_20_to_24_male   numeric ,
+  ADD percent_population_ages_25_to_29_female   numeric ,
+  ADD percent_population_ages_25_to_29_male   numeric ,
+  ADD percent_population_ages_30_to_34_female   numeric ,
+  ADD percent_population_ages_30_to_34_male   numeric ,
+  ADD percent_population_ages_35_to_39_female   numeric ,
+  ADD percent_population_ages_35_to_39_male   numeric ,
+  ADD percent_population_ages_40_to_44_female   numeric ,
+  ADD percent_population_ages_40_to_44_male   numeric ,
+  ADD percent_population_ages_45_to_49_female   numeric ,
+  ADD percent_population_ages_45_to_49_male   numeric ,
+  ADD percent_population_ages_50_to_54_female   numeric ,
+  ADD percent_population_ages_50_to_54_male   numeric ,
+  ADD percent_population_ages_55_to_59_female   numeric ,
+  ADD percent_population_ages_55_to_59_male   numeric ,
+  ADD percent_population_ages_60_to_64_female   numeric ,
+  ADD percent_population_ages_60_to_64_male   numeric ,
+  ADD percent_population_ages_65_and_above_female   numeric ,
+  ADD percent_population_ages_65_and_above_male   numeric;
+  
+  
+
+----DROPS----
+----drop for population:----
+ALTER TABLE population
+  
+  DROP COLUMN life_expectancy_at_birth_for_males,
+
+  DROP COLUMN life_expectancy_at_birth_for_females,
+  DROP COLUMN net_migration,
+ DROP COLUMN percent_demographics_in_rural,
+ DROP COLUMN percent_demographics_in_urban, 
+ DROP COLUMN percent_poverty_headcount_ratio_at_national_poverty_line,
+ DROP COLUMN percent_rural_poverty_headcount_ratio_at_national_poverty_line,
+ DROP COLUMN percent_urban_poverty_headcount_ratio_at_national_poverty_line,
+ DROP COLUMN percent_population_growth,
+  DROP COLUMN percent_rural_population_growth,
+  DROP COLUMN percent_urban_population_growth,
+  DROP COLUMN percent_population_female,
+  DROP COLUMN percent_population_male,
+  DROP COLUMN percent_population_ages_0_to_14_female,
+ DROP COLUMN percent_population_ages_0_to_14_male,
+ DROP COLUMN percent_population_ages_15_to_19_female,
+ DROP COLUMN percent_population_ages_15_to_19_male,
+ DROP COLUMN percent_population_ages_20_to_24_female,
+ DROP COLUMN percent_population_ages_20_to_24_male,
+  DROP COLUMN percent_population_ages_25_to_29_female,
+  DROP COLUMN percent_population_ages_25_to_29_male,
+  DROP COLUMN percent_population_ages_30_to_34_female,
+  DROP COLUMN percent_population_ages_30_to_34_male,
+  DROP COLUMN percent_population_ages_35_to_39_female,
+  DROP COLUMN percent_population_ages_35_to_39_male,
+  DROP COLUMN percent_population_ages_40_to_44_female,
+  DROP COLUMN percent_population_ages_40_to_44_male ,
+  DROP COLUMN percent_population_ages_45_to_49_female ,
+  DROP COLUMN percent_population_ages_45_to_49_male ,
+  DROP COLUMN percent_population_ages_50_to_54_female ,
+  DROP COLUMN percent_population_ages_50_to_54_male ,
+  DROP COLUMN percent_population_ages_55_to_59_female,
+  DROP COLUMN percent_population_ages_55_to_59_male,
+  DROP COLUMN percent_population_ages_60_to_64_female ,
+  DROP COLUMN percent_population_ages_60_to_64_male,
+  DROP COLUMN percent_population_ages_65_and_above_female ,
+  DROP COLUMN percent_population_ages_65_and_above_male ,
+  
+
+  DROP COLUMN country_code,
+  DROP COLUMN yr;
+
+
+--
+
+ALTER TABLE country
+
+  DROP COLUMN name,
+  DROP COLUMN continent,
+  DROP COLUMN capital_city,
+  DROP COLUMN region,
+  DROP COLUMN income_group,
+  DROP COLUMN trade_system,
+  DROP COLUMN two_alpha_code,
+  DROP COLUMN leader_name,
+  DROP COLUMN party_stance,
+  DROP COLUMN government_type,
+  DROP COLUMN currency_type,
+  DROP COLUMN total_population_count,
+  DROP COLUMN population_density,
+
+  DROP COLUMN fertility_rate,
+  DROP COLUMN suicide_death_rate ,
+ DROP COLUMN age_dependency_ratio_percent_working_age  ,
+ DROP COLUMN age_dependency_ratio_old ,
+ DROP COLUMN age_dependency_ratio_young ,
+ DROP COLUMN land_area_in_square_km ,
+ DROP COLUMN average_age ,
+ 
+
+  DROP COLUMN country_code ,
+  DROP COLUMN yr;
+
