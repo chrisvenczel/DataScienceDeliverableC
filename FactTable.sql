@@ -30,3 +30,18 @@ create table fact_table(
     and life_expectancy_at_birth <= 130
   )
 );
+
+/* populate the fact table */
+
+INSERT INTO fact_table(date_key,economy_key, event_key, country_key,
+population_key, education_key, climate_key, quality_of_life_key, health_key)
+
+Select d.date_key, e.economy_key, ev.event_key, c.country_key, p.population_key, 
+ed.education_key, cl.climate_key, q.quality_of_life_key, h.health_key 
+
+FROM "date" d, "economy" e, "event" ev, "country" c,
+"population" p, "education" ed, "climate" cl, "quality_of_life" q, "health" h 
+
+WHERE d.year_num = e.yr and e.country_code = p.country_code AND p.yr = ed.yr AND 
+cl.yr = q.yr AND cl.country_code = c.country_code AND ev.yr = q.yr AND h.yr = p.yr
+AND h.country_code = p.country_code
