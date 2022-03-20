@@ -1,5 +1,34 @@
 /* Creating the database tables and setting column constraints */
 
+create table key_indicators(
+  indicator_key serial primary key,
+  country_code text,
+  yr integer check (
+    yr >= 2005
+    and yr <= 2020
+  ),
+  human_development_index numeric check (
+    human_development_index >= 0
+    and human_development_index <= 1
+  ),
+  gdp bigint check (
+    gdp >= 0
+    and gdp <= 100000000000000
+  ),
+  death_rate_per_1000 numeric check (
+    death_rate_per_1000 >= 0
+    and death_rate_per_1000 <= 1000
+  ),
+  birth_rate_per_1000 numeric check (
+    birth_rate_per_1000 >= 0
+    and birth_rate_per_1000 <= 1000
+  ),
+  life_expectancy_at_birth numeric check (
+    life_expectancy_at_birth >= 0
+    and life_expectancy_at_birth <= 130
+  )
+);
+
 create table fact_table(
   date_key serial references date(date_key),
   economy_key serial references economy(economy_key),
