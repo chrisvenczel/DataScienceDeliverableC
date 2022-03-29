@@ -31,17 +31,50 @@ create table fact_table(
   )
 );
 
-/* populate the fact table */
+/* Populate fact_table */
 
-INSERT INTO fact_table(date_key,economy_key, event_key, country_key,
-population_key, education_key, climate_key, quality_of_life_key, health_key)
-
-Select d.date_key, e.economy_key, ev.event_key, c.country_key, p.population_key, 
-ed.education_key, cl.climate_key, q.quality_of_life_key, h.health_key 
-
-FROM "date" d, "economy" e, "event" ev, "country" c,
-"population" p, "education" ed, "climate" cl, "quality_of_life" q, "health" h 
-
-WHERE d.year_num = e.yr and e.country_code = p.country_code AND p.yr = ed.yr AND 
-cl.yr = q.yr AND cl.country_code = c.country_code AND ev.yr = q.yr AND h.yr = p.yr
-AND h.country_code = p.country_code
+insert into fact_table(
+date_key, economy_key, event_key, country_key, population_key,
+education_key, climate_key, quality_of_life_key, health_key,
+human_development_index, gdp, death_rate_per_1000, birth_rate_per_1000,
+life_expectancy_at_birth)
+-- Get all data joined together
+select
+-- The keys from the dimensions
+date.date_key,
+econ.economy_key,
+event.event_key,
+cntry.country_key,
+pop.population_key,
+educ.education_key,
+clm.climate_key,
+qol.quality_of_life_key,
+health.health_key,
+-- The facts from the (temporary) key_indicators table
+ki.human_development_index,
+ki.gdp,
+ki.death_rate_per_1000,
+ki.birth_rate_per_1000,
+ki.life_expectancy_at_birth
+from
+"event",
+"date",
+health,
+climate as clm,
+country as cntry,  
+economy as econ,
+education as educ,
+population as pop,
+quality_of_life as qol,
+key_indicators as ki
+-- Join them together by country and year
+where
+ki.yr = clm.yr and ki.country_code = clm.country_code and
+ki.yr = cntry.yr and ki.country_code = cntry.country_code and
+ki.yr = econ.yr and ki.country_code = econ.country_code and
+ki.yr = event.yr and ki.country_code = event.country_code and
+ki.yr = educ.yr and ki.country_code = educ.country_code and
+ki.yr = health.yr and ki.country_code = health.country_code and
+ki.yr = pop.yr and ki.country_code = pop.country_code and
+ki.yr = qol.yr and ki.country_code = qol.country_code and
+ki.yr = date.year_num
